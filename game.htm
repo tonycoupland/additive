@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Additive Game</title>
+    <meta name="viewport" content="user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link href='AutourOne.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.cookie.min.js"></script>
+
+    <script type="text/javascript" src="helpers.js"></script>
+    <script type="text/javascript" src="additive.game.js"></script>
+    <script type="text/javascript" src="additive.gameengine.js"></script>
+    <script type="text/javascript" src="additive.webgameengine.js"></script>
+
+    <style type="text/css">
+        html, body { font-family: Tahoma, Arial; font-size: 14px; height: 100%; max-height: 100%; margin: 0px; overflow: hidden; -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+        #main { position:absolute; left:0;top:0;right:0;bottom:0}
+        #splash { position:absolute; left:0;top:0;right:0;bottom:0; background-color:White; background-image:url('splash700.png'); background-position:center center; background-repeat:no-repeat; z-index:2000;}
+        #gameboard { position:relative; width:500px; height:500px; left:50px; top:50px; border:0 solid black; }
+       .cell {position:absolute; text-align:center; border:0; margin:2px; color:#ffffff; cursor:default; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-family: 'Autour One', cursive;}
+       .cell.marked { background-repeat:no-repeat; background-size:100%; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKYAAACmCAYAAABQiPR3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMTMxNkVBM0I3N0YxMUUzOUFFNUI4MzNDQTQ0NzQwMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMTMxNkVBNEI3N0YxMUUzOUFFNUI4MzNDQTQ0NzQwMiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkYxMzE2RUExQjc3RjExRTM5QUU1QjgzM0NBNDQ3NDAyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkYxMzE2RUEyQjc3RjExRTM5QUU1QjgzM0NBNDQ3NDAyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+06dXIAAAAs1JREFUeNrs2rFrE1EcwPGLdlKx+BdYHKSTg6CTu3RzEdpNUHDrIIJVcdJBKk4dHFycROrgJIo4ODkVtEgRFIduhQ4dGl0U4u+4VyxBktecdwT7+cAPilwSeHy5l3ux0+v1Chg3BywBwgRhIkwQJvvBxLALOp1OYx/uRAB3TPZ9mCdizltaxinMQzEvUpwwFmGWX0afxJyyrLQV5mTGNQsxF9PfRy0tbYQ5H/M+5k7Mmb+8bibmbt/dE0bffocd2aTjooMx72LOpX/ejHkT8yrmW8zrvrvqvRTxQI6LqBtm6XjMh5hjGe97P+amMGnj4Wc95mrmtWdjTlte2rhj7ngccyXz/b/GPI9Zjll1x6TJMA/HrMRM7/GzvqRAy/kkTP7VVr77iXuU1/3cNTDQxAivWYo5mXnt53SHLLfzNctNU2HOxVzKuO5tzLWdLRua3MqnYh5lXrsiStoIs7yzPi3+HKJvFNXv4rNFdTS01Xf9L0tLG1v57fTQcquofuX5WD5U923xL4vqF6LSd0tLHbnHRUdiukPe63rMg/T3jZjFYR/uuIi6W3k345qHMc/S39uWljafygfeAGMuF3s/eIdaT+U5fsRcKKr/cQSNf8dshO+YjBwm/A9bOQgTYYIwQZgIE4SJMEGYCBOECcJEmCBMhAnCRJggTBAmwgRhIkwQJsIEYYIwESYIE2GCMEGYCBOEiTBBmAgThAnCRJggTIQJwkSYIEwQJsIEYSJMECbCBGGCMBEmCBNhgjBBmAgThIkwQZgIE4QJwkSYIEyECcJEmCBMECbCBGEiTBAmCBNhgjARJggTYYIwQZgIE4SJMEGYCBOECcJEmCBMhAnCRJggTBAmwgRhIkwQJggTYYIwESYIE2GCMEGYCBOEiTBBmAgThAnCRJggTIQJwkSYIEwQJsIEYSJMECYIE2GCMBEmCBNhgjBBmAgT6vgtwACtvmZXfMafggAAAABJRU5ErkJggg==');}
+       .marker {position:absolute; text-align:center; border:0; margin:2px; color:#ffffff; cursor:default; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-family: 'Autour One', cursive; opacity:0.5;}
+       .textfield {position:absolute; border:0; margin:2px; color:#ffffff; cursor:default; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-family: 'Autour One', cursive; }
+       .textfield .label {position:absolute; left:0; top:-30px; text-align:center; margin:0; color:#ffffff; cursor:default; font-family: 'Autour One', cursive; }
+       .textfield .value {position:absolute; right:0; text-align:right; margin:2px; color:#ffffff; cursor:default; font-family: 'Autour One', cursive; }
+       .button {position:absolute; text-align:center; border:0; margin:2px; color:#ffffff; cursor:pointer; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-family: 'Autour One', cursive; }
+       .bluredbackground{position:absolute;left:0;right:0;top:0;bottom:0;display:none; background-color:White; opacity:0; z-index:10;display:none; -webkit-filter: blur(8px) contrast(0.4) brightness(1.4);}
+       .dialog { position:absolute; background-color:White; -webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;font-family: 'Autour One', cursive; z-index:11; display:none; overflow-y:scroll; overflow-x:none; -webkit-overflow-scrolling: touch;}
+       .trophy {position:relative; text-align:left; margin:0; padding-left:10px; color:#ffffff; cursor:default; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;font-family: 'Autour One', cursive;}
+       .trophy .description {display:inline;}
+       .trophy .value { position:absolute; display:inline; text-align:right; border:0; right:10px; color:#ffffff; cursor:default; font-family: 'Autour One', cursive;}
+       .trophy .mark {  position:absolute; display:inline; text-align:right; border:0; right:0; opacity:0.05; background-repeat:no-repeat; background-size:100%; background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAMAAACdUboEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo0Q0E3N0E1MkJCNjcxMUUzQUVFQkY3RkY4MDdBMTlFQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo0Q0E3N0E1M0JCNjcxMUUzQUVFQkY3RkY4MDdBMTlFQyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjRDQTc3QTUwQkI2NzExRTNBRUVCRjdGRjgwN0ExOUVDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjRDQTc3QTUxQkI2NzExRTNBRUVCRjdGRjgwN0ExOUVDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Bs8EmgAAAAZQTFRF////////VXz1bAAAAAJ0Uk5T/wDltzBKAAAAyElEQVR42uzXMQ5DIQwDUHP/S7djf0QgNqYdmuw8IRDCxnAPWmyxxRZb/FsRZhHvsYowi5iCB2IC6mIGqiJSUBQXoCauQElcgoq4BgVxA/LiDqTFLciKe5AUCyAnwi2WQEasgYRYBOtiFSyLuCbaftc6mIlhNQHOxbgep2IEKHAmAoGgwFluiSJOxbhJElzezFM8S3sfJDzi4zA5MH0z90VDalbBb4pDBH8luvrMRdHXuRSvIA63aG6aWuzvxt5iiy22OJ2XAAMAB54X25huHf8AAAAASUVORK5CYII=');}
+       .trophy .mark.marked { opacity:1;}
+       .trophy.notification {position:absolute;left:10px;right:10px;}
+                    
+       .menu {overflow:hidden; position:absolute;}
+       .button.newgamelevel { position:relative;margin:0;}
+    </style>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //var ge = new Marjuan.Additive.WebGameEngine({ rootURL: 'http://additive.coupland.me' });
+            var ge = new Marjuan.Additive.WebGameEngine({ rootURL: 'http://127.0.0.1' });
+
+            // Auto play mode...
+            $('body').on('click', '.marker', function(){
+
+              // Set board to known config
+              var hardcodedboard = [6,3,7,2,5,
+                                    9,3,9,8,8,
+                                    2,6,8,5,6,
+                                    1,4,9,5,8,
+                                    8,4,9,9,3];
+
+              for (var i=0;i<5;i++){
+                for (var j=0;j<5;j++){
+                  var n = hardcodedboard[i*5+j];
+                  $('.cell:nth-of-type('+(j*5+i+1)+')').html(n);
+                }
+              }
+            });
+
+        });
+    </script>
+</head>
+<body id="body">
+    <div id="splash">
+    </div>
+    <div id="main">
+        <div id="gameboard">&nbsp;</div>
+    </div>
+
+    <div id="trophybackground" class="bluredbackground">&nbsp;</div>
+    <div id="trophies" class="dialog"></div>
+
+    <div id="menubackground" class="bluredbackground">&nbsp;</div>
+    <div id="menu" class="dialog menu">
+        <div id="about" class="menu submenu" style="display:none;">
+            <p style="text-align:center;margin-top:0;">About</p>
+            <p>Additive was designed and developed in spare time by Tony Coupland</p>
+            <p>Follow me on Twitter @tonycoupland</p>
+            <p>Many thanks to all those who helped me test and optimise the game.</p>
+            <p></p><p></p>
+        </div>
+        <div id="instructions" class="menu submenu" style="display:none;">
+            <p style="text-align:center;margin-top:0;">Instructions</p>
+            <p>Slide rows or columns of cells together to make ten.</p>
+            <p>Once you have made ten, keep sliding to make twenty!</p>
+            <p>Try to slide to make thirty, but be careful not to lose the ten or twenty...</p>
+            <p>If you add cells up and get more than one hundred, it will loop around.</p>
+        </div>
+        <div id="removeads" class="menu submenu" style="display:none;">
+            <p style="text-align:center;margin-top:0;">Remove Ads</p>
+            <p>Pay once to permanently remove ads</p>
+            <div class="button" style="position:relative; width:auto;">£2.99</div>
+            <p>Purchased previously on another device? Click restore</p>
+            <div class="button" style="position:relative; width:auto;">Restore</div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49382942-1', 'coupland.me');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
