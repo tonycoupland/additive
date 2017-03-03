@@ -5,3 +5,6 @@ Slide columns or rows of tiles together to add their contents, once you've made 
 
 Work your way through four levels of difficultly from the easy to complete 'Junior' level through the the virtually impossible 'Genius' level.
 
+Visit the game website at http://additivegame.co.uk
+
+Download the iOS version built using Cordova from the AppStore https://itunes.apple.com/gb/app/additive/id878329435
